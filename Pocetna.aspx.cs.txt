@@ -1,0 +1,38 @@
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+
+ string cs = WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+  protected void Button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT Count(*) FROM Korisnici WHERE Username=@Username and Password=@Password";
+
+            cmd.Parameters.AddWithValue("Username", TextBox1.Text);
+            cmd.Parameters.AddWithValue("Password", TextBox2.Text);
+
+            try
+            {
+                con.Open();
+                if (Convert.ToInt32(cmd.ExecuteScalar()) == 1)
+                {
+                    TextBox1.Text = "";
+                    TextBox2.Text = "";
+                    Session["test"] = "notNull";
+                     //Response.Redirect(@"~/Pregledi.aspx", false);
+                    Response.Write("<script>alert('Uspesna prijava!')</script>");
+                }
+                else Response.Write("<script>alert('Niste uneli dobro korisnicko ime ili lozinku!', 'Neuspesan Log in')</script>");
+            }
+            catch
+            {
+                Response.Write("<script>alert('Dogodila se greska, molimo Vas sacekajte!', 'Neuspesan Log in')</script>");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }

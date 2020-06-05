@@ -1,0 +1,14 @@
+-postavi buttone za navigaciju Response.Redirect(@"~/Pregledi.aspx");
+-na pocetku xml, u atributnom obliku
+-povezuje se sa grid viewom, samo preko koda, u pregled.aspx.cs
+to je bilo u pregledu
+
+
+u autoru bukvalno nista
+
+
+na pocetnoj posle forme i navigacije, moras da napravis sql tabelu, 
+i da povezes, i tek onda ide kod
+
+<link href="StyleSheet1.css" rel="stylesheet" type="text/css" />
+ovo za css

@@ -1,0 +1,3 @@
+bukvalno samo
+ Response.Redirect(@"~/Pregledi.aspx");
+i tjt

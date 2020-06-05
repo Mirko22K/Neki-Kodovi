@@ -1,0 +1,22 @@
+ Using system.Data
+
+protected void Page_Load(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds.ReadXml(MapPath(@"~/App_Data/biblioteka.xml"));
+            DataTable dt = ds.Tables[0].Clone();
+            dt.Columns["citano"].DataType = Type.GetType("System.Int32");
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                dt.ImportRow(dr);
+            }
+            dt.AcceptChanges();
+            DataView dv = new DataView();
+            dv = dt.DefaultView;
+            dv.Sort = "citano ASC";
+            GridView1.DataSource = null;
+            GridView1.DataSource = dv;
+            GridView1.DataBind();
+        }
+
+ Response.Redirect(@"~/O Autoru.aspx");
